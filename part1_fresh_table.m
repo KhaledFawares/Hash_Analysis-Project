@@ -54,6 +54,7 @@ hitMargin = 1.96 * std(meanHit, 0, 1)' / sqrt(numTrials);
 missMargin = 1.96 * std(meanMiss, 0, 1)' / sqrt(numTrials);
 
 figure('Name', 'Fresh hash tables with linear probing');
+if exist('theme', 'file'), theme(gcf, 'light'); end % White figures for the report.
 subplot(2, 1, 1);
 errorbar(results.LoadPercent, results.MeanHitProbes, hitMargin, '-o');
 hold on;

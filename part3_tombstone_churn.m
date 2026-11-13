@@ -49,6 +49,7 @@ results = table(cycles, tombstoneMean, missMean, missMargin, ...
 disp(results([1 11 26 51 end], :));
 
 fig = figure('Name', 'Tombstones at 95% live load');
+if exist('theme', 'file'), theme(gcf, 'light'); end % White figures for the report.
 subplot(2, 1, 1);
 plot(cycles, tombstoneMean);
 ylabel('Mean tombstone count');

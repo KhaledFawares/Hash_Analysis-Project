@@ -30,3 +30,36 @@ The function prints and plots the simulated means alongside the exact
 expectation from Equation (2.1) and the large-table approximation
 `(1 + 1/(1 - loadFactor))/2`. The percentage difference is relative to the
 exact expectation. If you change the table size, update it in both files.
+
+## Part 3 · Tombstones under churn at 95% live load
+
+```matlab
+results3 = part3_tombstone_churn();
+```
+
+Each trial fills 9,500 of 10,000 slots and then runs 10,000 delete-and-insert
+cycles. A delete removes a random live key and leaves a tombstone. The new
+key reuses the first tombstone on its probe path, or takes the first empty
+slot if it reaches one first. The live load stays at exactly 95% throughout.
+A missing-key lookup treats tombstones as occupied, so it scans until a truly
+empty slot. Results go to `part3_tombstone_results.csv` and
+`part3_tombstone_churn.png` (30 trials, seed 376).
+
+Empty slots can only decrease: a delete never frees a slot, and an insert
+either reuses a tombstone or uses up an empty slot. The tombstone count
+approaches 500, the number of non-live slots, and the cost of a miss climbs
+toward a full scan of the table (10,000 probes).
+
+## Part 4 · Periodic rebuild versus tombstones
+
+```matlab
+results4 = part4_rebuild_compare();
+```
+
+Two tables see the same keys, homes and deletions in the same order. Table A
+keeps its tombstones. Table B is cleared and its live keys are reinserted
+every `rebuildEvery` cycles (1,000 by default). The function counts the
+probes spent on rebuilds and churn inserts, and the miss probes saved. It
+also prints the number of unsuccessful lookups per cycle at which rebuilding
+pays for itself. Results go to `part4_rebuild_results.csv` and
+`part4_rebuild_compare.png` (30 trials, seed 377).
