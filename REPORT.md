@@ -1,0 +1,3 @@
+Mohammed im just throwin stuff here i want u to help me with the report...
+
+**Figure 1.** Lookup cost and longest occupied run in fresh hash tables using linear probing. Each point summarizes 50 trials with 10,000 slots per table. Error bars in the top panel show approximate 95% confidence intervals for the mean probe counts. The bottom panel shows the average of the longest occupied run in each trial.
